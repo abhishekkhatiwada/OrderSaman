@@ -1,3 +1,5 @@
+import 'package:demo/beacon_emitter.dart';
+import 'package:demo/beacon_scanner.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatelessWidget {
@@ -14,13 +16,20 @@ class Homepage extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  // MaterialPageRoute(
-                  //     builder: (context) => BeaconBroadcastApp()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BeaconBroadcastApp()));
                 },
                 child: Text("BeaconEmitter")),
-            ElevatedButton(onPressed: () {}, child: Text("Scanner"))
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BeaconScannerApp()));
+                },
+                child: Text("Scanner"))
           ],
         ),
       ),
