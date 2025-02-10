@@ -19,6 +19,7 @@ class _BeaconScannerAppState extends State<BeaconScannerApp> {
   @override
   void initState() {
     super.initState();
+
     _requestPermissions();
   }
 
