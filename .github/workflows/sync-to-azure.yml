@@ -3,20 +3,23 @@ name: Sync to Azure DevOps
 on:
   push:
     branches:
-      - main  # Change if using a different branch
+      - main  # Adjust if using a different branch
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout GitHub Repo
+      - name: Checkout GitHub Repo (Full Clone)
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensure full history is cloned
 
       - name: Push Code to Azure DevOps
         run: |
           git config --global user.email "abhishekkhatiwada001@gmail.com"
           git config --global user.name "abhishekkhatiwada"
           git remote add azure "https://ordersaman:${AZURE_PAT}@dev.azure.com/ordersaman/order%20saman%20app/_git/order%20saman%20app"
-          git push --mirror azure
+          git fetch --unshallow  # Convert shallow clone to full clone
+          git push --force azure main  # Force push to fix missing objects
         env:
           AZURE_PAT: ${{ secrets.AZURE_PAT }}
