@@ -1,0 +1,22 @@
+name: Sync to Azure DevOps
+
+on:
+  push:
+    branches:
+      - main  # Change if using a different branch
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub Repo
+        uses: actions/checkout@v3
+
+      - name: Push Code to Azure DevOps
+        run: |
+          git config --global user.email "abhishekkhatiwada001@gmail.com"
+          git config --global user.name "abhishekkhatiwada"
+          git remote add azure "https://ordersaman:${AZURE_PAT}@dev.azure.com/ordersaman/order%20saman%20app/_git/order%20saman%20app"
+          git push --mirror azure
+        env:
+          AZURE_PAT: ${{ secrets.AZURE_PAT }}
